@@ -7,6 +7,8 @@
 
 # tlively's super special fork
 
+Edit files in spectec/test-prose/doc and spectec/spec/wasm-3.0.
+
 Run `make all` in spectec/test-prose, then serve from spectec/test-prose/\_sphinx/\_build/html.
 
 # WebAssembly SpecTec
