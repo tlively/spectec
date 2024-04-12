@@ -5,6 +5,9 @@
 [![CI for specs](https://github.com/Wasm-DSL/spectec/actions/workflows/ci-spec.yml/badge.svg)](https://github.com/Wasm-DSL/spectec/actions/workflows/ci-spec.yml)
 [![CI for interpreter & tests](https://github.com/Wasm-DSL/spectec/actions/workflows/ci-interpreter.yml/badge.svg)](https://github.com/Wasm-DSL/spectec/actions/workflows/ci-interpreter.yml)
 
+# tlively's super special fork
+
+Run `make all` in spectec/test-prose, then serve from spectec/test-prose/\_sphinx/\_build/html.
 
 # WebAssembly SpecTec
 
