@@ -23,7 +23,7 @@ rule Ref_ok/func:
   -- if s.FUNCS[a].TYPE = dt
 
 rule Ref_ok/host:
-  s |- REF.HOST_ADDR a : (REF eps ANY)
+  s |- REF.HOST_ADDR a : (REF eps MANY)
 
 rule Ref_ok/extern:
   s |- REF.EXTERN addrref : (REF eps EXTERN)
