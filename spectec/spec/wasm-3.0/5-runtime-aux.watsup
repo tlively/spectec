@@ -87,6 +87,7 @@ def $eleminst(state) : eleminst*      hint(show %.ELEMS)
 def $datainst(state) : datainst*      hint(show %.DATAS)
 def $structinst(state) : structinst*  hint(show %.STRUCTS)
 def $arrayinst(state) : arrayinst*    hint(show %.ARRAYS)
+def $stackinst(state) : stackinst*    hint(show %.STACKS)
 def $moduleinst(state) : moduleinst   hint(show %.MODULE)
 
 def $funcinst((s; f)) = s.FUNCS
@@ -97,6 +98,7 @@ def $eleminst((s; f)) = s.ELEMS
 def $datainst((s; f)) = s.DATAS
 def $structinst((s; f)) = s.STRUCTS
 def $arrayinst((s; f)) = s.ARRAYS
+def $stackinst((s; f)) = s.STACKS
 def $moduleinst((s; f)) = f.MODULE
 
 def $type(state, typeidx) : deftype         hint(show %.TYPES[%])
@@ -144,9 +146,11 @@ def $with_array((s; f), a, i, fv) = s[.ARRAYS[a].FIELDS[i] = fv]; f
 
 def $ext_structinst(state, structinst*) : state  hint(show %[.STRUCTS =.. %])
 def $ext_arrayinst(state, arrayinst*) : state    hint(show %[.ARRAYS =.. %])
+def $ext_stackinst(state, stackinst*) : state    hint(show %[.STACKS =.. %])
 
 def $ext_structinst((s; f), si*) = s[.STRUCTS =.. si*]; f
 def $ext_arrayinst((s; f), ai*) = s[.ARRAYS =.. ai*]; f
+def $ext_stackinst((s; f), ci*) = s[.STACKS =.. ci*]; f
 
 
 ;; Growing
