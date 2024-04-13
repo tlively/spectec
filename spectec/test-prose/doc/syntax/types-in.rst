@@ -9,7 +9,7 @@ Types
 Number Types
 ~~~~~~~~~~~~
 
-$${syntax+: 
+$${syntax+:
   numtype
 }
 
@@ -19,7 +19,7 @@ $${syntax+:
 Vector Types
 ~~~~~~~~~~~~
 
-$${syntax+: 
+$${syntax+:
   vectype
 }
 
@@ -29,7 +29,7 @@ $${syntax+:
 Heap Types
 ~~~~~~~~~~
 
-$${syntax+: 
+$${syntax+:
   absheaptype
   heaptype
 }
@@ -40,7 +40,7 @@ $${syntax+:
 Reference Types
 ~~~~~~~~~~~~~~~
 
-$${syntax: 
+$${syntax:
   nul
   reftype
 }
@@ -73,7 +73,7 @@ $${syntax: functype}
 Aggregate Types
 ~~~~~~~~~~~~~~~
 
-$${syntax+: 
+$${syntax+:
   packtype
   storagetype
   fieldtype
@@ -84,7 +84,13 @@ $${syntax+:
 Composite Types
 ~~~~~~~~~~~~~~~
 
-$${syntax: comptype}
+$${syntax:
+  structtype
+  arraytype
+  stacktype
+  functype
+  comptype
+}
 
 .. _syntax-rectype:
 .. _syntax-subtype:
@@ -126,7 +132,7 @@ $${syntax: tabletype}
 Global Types
 ~~~~~~~~~~~~
 
-$${syntax+: 
+$${syntax+:
   globaltype
   mut
 }

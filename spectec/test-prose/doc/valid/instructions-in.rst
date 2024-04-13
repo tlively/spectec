@@ -57,7 +57,7 @@ $${rule-prose: valid/cvtop}
 
 \
 
-$${rule+: 
+$${rule+:
   Instr_ok/cvtop-*
 }
 
@@ -252,6 +252,27 @@ $${rule-prose: valid/array.init_elem}
 \
 
 $${rule: Instr_ok/array.init_elem}
+
+.. _valid-instructions-stack-reference:
+
+Stack Reference Instructions
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. _valid-stack.new:
+
+$${rule-prose: valid/stack.new}
+
+\
+
+$${rule: Instr_ok/stack.new}
+
+.. _valid-stack.switch:
+
+$${rule-prose: valid/stack.switch}
+
+\
+
+$${rule: Instr_ok/stack.switch}
 
 .. _valid-instructions-scalar-reference:
 
@@ -862,7 +883,7 @@ $${rule+:
 Expressions
 ~~~~~~~~~~~
 
-$${rule+: 
+$${rule+:
   Expr_ok
   Instr_const/*
   Expr_const

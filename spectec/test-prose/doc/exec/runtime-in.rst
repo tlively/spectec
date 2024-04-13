@@ -49,6 +49,7 @@ $${syntax: store}
 .. _syntax-dataaddr:
 .. _syntax-structaddr:
 .. _syntax-arrayaddr:
+.. _syntax-stackaddr:
 .. _syntax-hostaddr:
 
 Addresses
@@ -64,6 +65,7 @@ $${syntax+:
   dataaddr
   structaddr
   arrayaddr
+  stackaddr
   hostaddr
 }
 
@@ -231,8 +233,8 @@ $${syntax+:
   structinst
   arrayinst
   fieldval
-  packval
-}
+  packval}
+
 
 .. _def-arrayinst:
 
@@ -249,6 +251,15 @@ $${definition-prose: structinst}
 \
 
 $${definition: structinst}
+
+Stack Instances
+~~~~~~~~~~~~~~~
+
+$${syntax: stackinst}
+..
+   \
+
+   $ $ {definition-prose: stackinst}
 
 .. _exec-runtime-stack:
 

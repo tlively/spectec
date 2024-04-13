@@ -546,6 +546,20 @@ rule Step_read/array.init_data-num:
   -- Expand: $type(z, x) ~~ ARRAY (mut zt)
   -- if $zbytes(zt, c) = $data(z, y).BYTES[j : $zsize(zt)/8]
 
+rule Step/stack.new:
+  z; (STACK.NEW x y)  ~>  $ext_stackinst(z, ki); (REF.STACK_ADDR a)
+  -- if a = |$stackinst(z)|
+     /\ ki = {TYPE $type(z, x), FRAME {LOCALS eps, MODULE $moduleinst(z)}, INSTS (SWITCH_TRAP) (FRAME_ 0 `{f} (CALL y))}
+  -- if f = {LOCALS eps, MODULE $moduleinst(z)}
+
+rule Step/stack.switch-null:
+  z; (REF.NULL ht) (STACK.SWITCH x)  ~>  z; TRAP
+
+rule Step/stack.switch-stack:
+  z; val^n (REF.STACK_ADDR a) (STACK.SWITCH x)  ~>  z; val^n
+  -- Expand: $type(z, x) ~~ STACK (t* yy)
+  -- if |t*| = n
+
 
 ;; External reference instructions
 

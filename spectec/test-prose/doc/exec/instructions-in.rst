@@ -407,6 +407,22 @@ $${rule-prose: exec/array.init_data}
 
 $${rule+: Step_read/array.init_data-*}
 
+.. _exec-stack.new:
+
+$${rule-prose: exec/stack.new}
+
+\
+
+$${rule+: Step/stack.new}
+
+.. _exec-stack.switch:
+
+$${rule-prose: exec/stack.switch}
+
+\
+
+$${rule+: Step/stack.switch-*}
+
 .. _exec-extern.convert_any:
 
 $${rule-prose: exec/extern.convert_any}

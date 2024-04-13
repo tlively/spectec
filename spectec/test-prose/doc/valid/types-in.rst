@@ -22,7 +22,7 @@ $${rule: Vectype_ok}
 Heap Types
 ~~~~~~~~~~
 
-$${rule+: 
+$${rule+:
   Heaptype_ok/*
 }
 
@@ -47,7 +47,7 @@ $${rule+:
 Block Types
 ~~~~~~~~~~~
 
-$${rule+: 
+$${rule+:
   Blocktype_ok/*
 }
 
@@ -86,11 +86,18 @@ $${rule+:
 Field Types
 ~~~~~~~~~~~
 
-$${rule+: 
+$${rule+:
   Packtype_ok
   Storagetype_ok/*
   Fieldtype_ok
 }
+
+.. _valid-types-stack-types:
+
+Stack Types
+~~~~~~~~~~~
+
+$${rule: Stacktype_ok}
 
 .. _valid-types-recursive-types:
 

@@ -113,6 +113,7 @@ syntax oktypeidxnat hint(show OK#(typeidx,n)) = | OK typeidx nat  hint(show OK#(
 relation Packtype_ok: context |- packtype : OK        hint(show "K-pack")
 relation Fieldtype_ok: context |- fieldtype : OK      hint(show "K-field")
 relation Storagetype_ok: context |- storagetype : OK  hint(show "K-storage")
+relation Stacktype_ok: context |- stacktype : OK      hint(show "K-stack")
 relation Comptype_ok: context |- comptype : OK        hint(show "K-comp")
 relation Functype_ok: context |- functype : OK        hint(show "K-func")
 relation Subtype_ok: context |- subtype : oktypeidx   hint(show "K-sub")
@@ -141,7 +142,6 @@ rule Fieldtype_ok:
   C |- MUT? storagetype : OK
   -- Storagetype_ok: C |- storagetype : OK
 
-
 rule Comptype_ok/struct:
   C |- STRUCT fieldtype* : OK
   -- (Fieldtype_ok: C |- fieldtype : OK)*
@@ -150,16 +150,30 @@ rule Comptype_ok/array:
   C |- ARRAY fieldtype : OK
   -- Fieldtype_ok: C |- fieldtype : OK
 
+rule Comptype_ok/stack:
+  C |- STACK stacktype : OK
+  -- Stacktype_ok: C |- stacktype : OK
+
 rule Comptype_ok/func:
   C |- FUNC functype : OK
   -- Functype_ok: C |- functype : OK
 
 
+def $expandht(context, typeuse) : comptype  hint(show $expand_(%, %))
+def $expandht(C, $idx(x)) = $expanddt(C.TYPES[x])
+def $expandht(C, deftype) = $expanddt(deftype)
+def $expandht(C, REC n) = ct                   -- if C.REC[n] = SUB fin tu* ct
+
+rule Stacktype_ok:
+  C |- t* typeuse : OK
+  -- Resulttype_ok: C |- t* : OK
+  -- if $expandht(C, typeuse) = STACK stacktype
+
 rule Subtype_ok:
   C |- SUB FINAL? $idx(typeidx)* comptype : OK(x_0)
   -- if |x*| <= 1
   -- (if x < x_0)*
-  -- (if $unrolldt(C.TYPES[x]) = SUB $idx(x')* comptype')*
+  -- (if $expandht(C, $idx(x)) = comptype')*
   ----
   -- Comptype_ok: C |- comptype : OK
   -- (Comptype_sub: C |- comptype <: comptype')*
@@ -169,16 +183,11 @@ def $before(deftype, x, i) = true
 def $before(_IDX typeidx, x, i) = typeidx < x
 def $before(REC j, x, i) = j < i
 
-def $unrollht(context, heaptype) : subtype  hint(show $unroll_(%,%))
-def $unrollht(C, deftype) = $unrolldt(deftype)
-def $unrollht(C, _IDX typeidx) = $unrolldt(C.TYPES[typeidx])
-def $unrollht(C, REC i) = C.REC[i]
-
 rule Subtype_ok2:
   C |- SUB FINAL? typeuse* compttype : OK x i
   -- if |typeuse*| <= 1
   -- (if $before(typeuse, x, i))*
-  -- (if $unrollht(C, typeuse) = SUB typeuse'* comptype')*
+  -- (if $expandht(C, typeuse) = comptype')*
   ----
   -- Comptype_ok: C |- comptype : OK
   -- (Comptype_sub: C |- comptype <: comptype')*
@@ -842,6 +851,17 @@ rule Instr_ok/array.init_data:
   -- if $unpack(zt) = numtype \/ $unpack(zt) = vectype
   -- if C.DATAS[y] = OK
 
+;; Stack instructions
+
+rule Instr_ok/stack.new:
+  C |- STACK.NEW x y : eps -> (REF $idx(x))
+  -- Expand: C.TYPES[x] ~~ STACK (t* tu)
+  -- Expand: C.FUNCS[y] ~~ FUNC (t* (REF NULL tu) -> eps)
+
+rule Instr_ok/stack.switch:
+  C |- STACK.SWITCH x : t_1* (REF NULL $idx(x)) -> t_2* (REF $idx(x_2))
+  -- Expand: C.TYPES[x] ~~ STACK (t_1* tu)
+  -- if $expandht(C, tu) = STACK (t_2* $idx(x_2))
 
 ;; External reference instructions
 
