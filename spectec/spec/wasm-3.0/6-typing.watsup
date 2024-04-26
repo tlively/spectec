@@ -864,7 +864,7 @@ rule Instr_ok/stack.new:
   -- Expand: C.FUNCS[y] ~~ FUNC (t* rt -> eps)
 
 rule Instr_ok/stack.new_ref:
-  C |- STACK.NEW_REF x y : (REF NULL $idx(y)) -> (REF $idx(x))
+  C |- STACK.NEW_REF x $idx(y) : (REF NULL $idx(y)) -> (REF $idx(x))
   -- Expand: C.TYPES[x] ~~ STACK (t* rt)
   -- Expand: C.TYPES[y] ~~ FUNC (t* rt -> eps)
 
@@ -875,7 +875,7 @@ rule Instr_ok/stack.new_switch:
   -- if $expandht(C, yy) = STACK (t_2* rt)
 
 rule Instr_ok/stack.new_switch_ref:
-  C |- STACK.NEW_SWITCH x y : t_1* (REF nul $idx(y)) -> t_2* rt
+  C |- STACK.NEW_SWITCH_REF x $idx(y) : t_1* (REF nul $idx(y)) -> t_2* rt
   -- Expand: C.TYPES[x] ~~ STACK (t_1* (REF nul yy))
   -- Expand: C.TYPES[y] ~~ FUNC (t_1* (REF nul yy) -> eps)
   -- if $expandht(C, yy) = STACK (t_2* rt)

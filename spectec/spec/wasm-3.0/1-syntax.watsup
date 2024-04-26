@@ -568,9 +568,9 @@ syntax instr/array hint(desc "array reference instruction") = ...
 
 syntax instr/stack hint(desc "stack reference instruction") = ...
   | STACK.NEW typeidx funcidx
-  | STACK.NEW_REF typeidx typeidx
+  | STACK.NEW_REF typeidx typeuse
   | STACK.NEW_SWITCH typeidx funcidx
-  | STACK.NEW_SWITCH_REF typeidx typeidx
+  | STACK.NEW_SWITCH_REF typeidx typeuse
   | STACK.SWITCH typeidx
   | STACK.SWITCH_RETIRE typeidx
   | ...

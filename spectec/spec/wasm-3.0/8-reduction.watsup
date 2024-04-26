@@ -547,18 +547,35 @@ rule Step_read/array.init_data-num:
   -- if $zbytes(zt, c) = $data(z, y).BYTES[j : $zsize(zt)/8]
 
 rule Step/stack.new:
-  z; (STACK.NEW x y)  ~>  $ext_stackinst(z, ki); (REF.STACK_ADDR a)
-  -- if a = |$stackinst(z)|
-     /\ ki = {TYPE $type(z, x), FRAME {LOCALS eps, MODULE $moduleinst(z)}, INSTS (SWITCH_TRAP) (FRAME_ 0 `{f} (CALL y))}
+  z; (STACK.NEW x y)  ~>  z; (REF.FUNC_ADDR a) (STACK.NEW_REF x $funcinst(z)[a].TYPE)
+  -- if $funcaddr(z)[y] = a
+
+rule Step_read/stack.new_ref-null:
+  z; (REF.NULL ht) (STACK.NEW_REF x $idx(y))   ~>   TRAP
+
+;; TODO: Figure out what goes in the stack instance
+;; TODO: Allow prefix of function params to be filled at allocation time
+rule Step/stack.new_ref-func:
+  z; (REF.FUNC_ADDR a_1) (STACK.NEW_REF x yy)  ~>  $ext_stackinst(z, ki); (REF.STACK_ADDR a_2)
+  -- if a_2 = |$stackinst(z)|
+     /\ ki = {TYPE $type(z, x), FRAME {LOCALS eps, MODULE $moduleinst(z)}, INSTS (SWITCH_TRAP) (FRAME_ 0 `{f} (REF.FUNC_ADDR a_1) (CALL_REF yy))}
   -- if f = {LOCALS eps, MODULE $moduleinst(z)}
 
-rule Step/stack.switch-null:
-  z; (REF.NULL ht) (STACK.SWITCH x)  ~>  z; TRAP
+rule Step_pure/stack.new_switch:
+  (STACK.NEW_SWITCH x y)  ~>  (STACK.NEW x y) (STACK.SWITCH x)
+
+rule Step_pure/stack.new_switch_ref:
+  (STACK.NEW_SWITCH_REF x yy)  ~> (STACK.NEW_REF x yy) (STACK.SWITCH x)
+
+rule Step_read/stack.switch-null:
+  z; (REF.NULL ht) (STACK.SWITCH x)  ~>  TRAP
 
 rule Step/stack.switch-stack:
   z; val^n (REF.STACK_ADDR a) (STACK.SWITCH x)  ~>  z; val^n
   -- Expand: $type(z, x) ~~ STACK (t* rt)
   -- if |t*| = n
+
+;; TODO: stack.switch_retire
 
 
 ;; External reference instructions
