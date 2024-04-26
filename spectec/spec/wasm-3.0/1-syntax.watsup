@@ -192,7 +192,7 @@ syntax fieldtype hint(desc "field type") =
 syntax functype hint(desc "function type") = resulttype -> resulttype
 syntax structtype hint(desc "structure type") = list(fieldtype)
 syntax arraytype hint(desc "array type") = fieldtype
-syntax stacktype hint(desc "stack type") = resulttype typeuse
+syntax stacktype hint(desc "stack type") = resulttype reftype
 
 syntax comptype hint(desc "composite type") =
   | STRUCT structtype

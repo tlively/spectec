@@ -557,7 +557,7 @@ rule Step/stack.switch-null:
 
 rule Step/stack.switch-stack:
   z; val^n (REF.STACK_ADDR a) (STACK.SWITCH x)  ~>  z; val^n
-  -- Expand: $type(z, x) ~~ STACK (t* yy)
+  -- Expand: $type(z, x) ~~ STACK (t* rt)
   -- if |t*| = n
 
 

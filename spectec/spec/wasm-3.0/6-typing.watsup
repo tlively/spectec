@@ -165,9 +165,9 @@ def $expandht(C, deftype) = $expanddt(deftype)
 def $expandht(C, REC n) = ct                   -- if C.REC[n] = SUB fin tu* ct
 
 rule Stacktype_ok:
-  C |- t* typeuse : OK
+  C |- t* (REF nul tu) : OK
   -- Resulttype_ok: C |- t* : OK
-  -- if $expandht(C, typeuse) = STACK stacktype
+  -- if $expandht(C, tu) = STACK stacktype
 
 rule Subtype_ok:
   C |- SUB FINAL? $idx(typeidx)* comptype : OK(x_0)
@@ -855,13 +855,13 @@ rule Instr_ok/array.init_data:
 
 rule Instr_ok/stack.new:
   C |- STACK.NEW x y : eps -> (REF $idx(x))
-  -- Expand: C.TYPES[x] ~~ STACK (t* tu)
-  -- Expand: C.FUNCS[y] ~~ FUNC (t* (REF NULL tu) -> eps)
+  -- Expand: C.TYPES[x] ~~ STACK (t* rt)
+  -- Expand: C.FUNCS[y] ~~ FUNC (t* rt -> eps)
 
 rule Instr_ok/stack.switch:
-  C |- STACK.SWITCH x : t_1* (REF NULL $idx(x)) -> t_2* (REF $idx(x_2))
-  -- Expand: C.TYPES[x] ~~ STACK (t_1* tu)
-  -- if $expandht(C, tu) = STACK (t_2* $idx(x_2))
+  C |- STACK.SWITCH x : t_1* (REF NULL $idx(x)) -> t_2* rt
+  -- Expand: C.TYPES[x] ~~ STACK (t_1* (REF nul tu))
+  -- if $expandht(C, tu) = STACK (t_2* rt)
 
 ;; External reference instructions
 
