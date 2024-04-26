@@ -442,6 +442,11 @@ rule Comptype_sub/func:
   C |- FUNC ft_1 <: FUNC ft_2
   -- Functype_sub: C |- ft_1 <: ft_2
 
+rule Comptype_sub/stack:
+  C |- STACK (t_1* rt_1) <: STACK (t_2* rt_2)
+  -- Resulttype_sub: C |- t_2* <: t_1*
+  -- Reftype_sub: C |- rt_2 <: rt_1
+
 
 rule Deftype_sub/refl:
   C |- deftype_1 <: deftype_2
