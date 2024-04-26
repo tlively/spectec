@@ -858,10 +858,31 @@ rule Instr_ok/stack.new:
   -- Expand: C.TYPES[x] ~~ STACK (t* rt)
   -- Expand: C.FUNCS[y] ~~ FUNC (t* rt -> eps)
 
+rule Instr_ok/stack.new_ref:
+  C |- STACK.NEW_REF x y : (REF NULL $idx(y)) -> (REF $idx(x))
+  -- Expand: C.TYPES[x] ~~ STACK (t* rt)
+  -- Expand: C.TYPES[y] ~~ FUNC (t* rt -> eps)
+
+rule Instr_ok/stack.new_switch:
+  C |- STACK.NEW_SWITCH x y : t_1* -> t_2* rt
+  -- Expand: C.TYPES[x] ~~ STACK (t_1* (REF nul yy))
+  -- Expand: C.FUNCS[y] ~~ FUNC (t_1* (REF nul yy) -> eps)
+  -- if $expandht(C, yy) = STACK (t_2* rt)
+
+rule Instr_ok/stack.new_switch_ref:
+  C |- STACK.NEW_SWITCH x y : t_1* (REF nul $idx(y)) -> t_2* rt
+  -- Expand: C.TYPES[x] ~~ STACK (t_1* (REF nul yy))
+  -- Expand: C.TYPES[y] ~~ FUNC (t_1* (REF nul yy) -> eps)
+  -- if $expandht(C, yy) = STACK (t_2* rt)
+
 rule Instr_ok/stack.switch:
   C |- STACK.SWITCH x : t_1* (REF NULL $idx(x)) -> t_2* rt
-  -- Expand: C.TYPES[x] ~~ STACK (t_1* (REF nul tu))
-  -- if $expandht(C, tu) = STACK (t_2* rt)
+  -- Expand: C.TYPES[x] ~~ STACK (t_1* (REF nul yy))
+  -- if $expandht(C, yy) = STACK (t_2* rt)
+
+rule Instr_ok/stack.switch_retire:
+  C |- STACK.SWITCH_RETIRE x : t_1* (REF NULL $idx(x)) -> t_2*
+  -- Expand: C.TYPES[x] ~~ STACK (t_1* (REF NULL yy))
 
 ;; External reference instructions
 
