@@ -567,8 +567,8 @@ rule Step_pure/stack.new_switch:
 rule Step_pure/stack.new_switch_ref:
   (STACK.NEW_SWITCH_REF x yy)  ~> (STACK.NEW_REF x yy) (STACK.SWITCH x)
 
-rule Step_read/stack.switch-null:
-  z; (REF.NULL ht) (STACK.SWITCH x)  ~>  TRAP
+rule Step_pure/stack.switch-null:
+  (REF.NULL ht) (STACK.SWITCH x)  ~>  TRAP
 
 rule Step/stack.switch-stack:
   z; val^n (REF.STACK_ADDR a) (STACK.SWITCH x)  ~>  z; val^n
