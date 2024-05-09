@@ -298,13 +298,13 @@ $${rule-prose: valid/stack.switch}
 
 $${rule: Instr_ok/stack.switch}
 
-.. _valid-stack.switch_retire:
+.. _valid-stack.retire:
 
-$${rule-prose: valid/stack.switch_retire}
+$${rule-prose: valid/stack.retire}
 
 \
 
-$${rule: Instr_ok/stack.switch_retire}
+$${rule: Instr_ok/stack.retire}
 
 .. _valid-instructions-scalar-reference:
 

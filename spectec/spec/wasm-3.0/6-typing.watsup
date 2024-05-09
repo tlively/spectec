@@ -885,8 +885,8 @@ rule Instr_ok/stack.switch:
   -- Expand: C.TYPES[x] ~~ STACK (t_1* (REF nul yy))
   -- if $expandht(C, yy) = STACK (t_2* rt)
 
-rule Instr_ok/stack.switch_retire:
-  C |- STACK.SWITCH_RETIRE x : t_1* (REF NULL $idx(x)) -> t_2*
+rule Instr_ok/stack.retire:
+  C |- STACK.RETIRE x : t_1* (REF NULL $idx(x)) -> t_2*
   -- Expand: C.TYPES[x] ~~ STACK (t_1* (REF NULL yy))
 
 ;; External reference instructions
