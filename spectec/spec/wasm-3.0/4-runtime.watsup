@@ -12,6 +12,7 @@ syntax dataaddr hint(desc "data address") = addr
 syntax hostaddr hint(desc "host address") = addr
 syntax structaddr hint(desc "structure address") = addr
 syntax arrayaddr hint(desc "array address") = addr
+syntax stackaddr hint(desc "stack address") = addr
 
 var a : addr
 var fa : funcaddr
@@ -22,6 +23,7 @@ var ea : elemaddr
 var da : dataaddr
 var sa : structaddr
 var aa : arrayaddr
+var ca : stackaddr
 
 
 ;;
@@ -38,6 +40,7 @@ syntax addrref hint(desc "address reference") =
   | REF.I31_NUM u31                      hint(show REF.I31 %)
   | REF.STRUCT_ADDR structaddr           hint(show REF.STRUCT %)
   | REF.ARRAY_ADDR arrayaddr             hint(show REF.ARRAY %)
+  | REF.STACK_ADDR stackaddr             hint(show REF.STACK %)
   | REF.FUNC_ADDR funcaddr               hint(show REF.FUNC %)
   | REF.HOST_ADDR hostaddr               hint(show REF.HOST %)
   | REF.EXTERN addrref
@@ -101,6 +104,11 @@ syntax structinst hint(desc "structure instance") =
 syntax arrayinst hint(desc "array instance") =
   { TYPE deftype,
     FIELDS fieldval* }
+syntax stackinst hint(desc "stack instance") =
+  { TYPE deftype,
+    FRAME frame,
+    INSTS admininstr* }
+
 
 syntax moduleinst hint(desc "module instance") =
   { TYPES deftype*,
@@ -125,6 +133,7 @@ var si : structinst
 var ai : arrayinst
 var fv : fieldval
 var pv : packval
+var ki : stackinst
 
 
 ;; Configurations proper
@@ -137,7 +146,10 @@ syntax store hint(desc "store") =
     ELEMS eleminst*,
     DATAS datainst*,
     STRUCTS structinst*,
-    ARRAYS arrayinst* }
+    ARRAYS arrayinst*,
+    STACKS stackinst*,
+    ENTRY stackaddr?
+  }
 
 syntax frame hint(desc "frame") =
   { LOCALS (val?)*,
@@ -161,6 +173,7 @@ syntax admininstr hint(show instr) hint(desc "administrative instruction") =
   | LABEL_ n `{instr*} admininstr* hint(show LABEL_%#% %%)
   | FRAME_ n `{frame} admininstr*  hint(show FRAME_%#% %%)
   | TRAP
+  | SWITCH_TRAP
 
 syntax E hint(desc "evaluation context") =
   | _HOLE `[ _ ]

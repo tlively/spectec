@@ -272,14 +272,6 @@ $${definition-prose: unrolldt}
 
 $${definition: unrolldt}
 
-.. _def-unrollht:
-
-$${definition-prose: unrollht}
-
-\
-
-$${definition: unrollht}
-
 .. _def-expanddt:
 
 $${definition-prose: expanddt}
@@ -287,6 +279,14 @@ $${definition-prose: expanddt}
 \
 
 $${definition: expanddt}
+
+.. _def-expandht:
+
+$${definition-prose: expandht}
+
+\
+
+$${definition: expandht}
 
 $${rule: Expand}
 
@@ -305,7 +305,7 @@ $${syntax: instrtype}
 Local Types
 ~~~~~~~~~~~
 
-$${syntax+: 
+$${syntax+:
   localtype
   init
 }

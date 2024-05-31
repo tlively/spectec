@@ -15,7 +15,7 @@ Numeric Instructions
 .. _syntax-testop:
 .. _syntax-relop:
 
-$${syntax+: 
+$${syntax+:
   {inn
   fnn}
   sx
@@ -42,13 +42,20 @@ Aggregate Instructions
 
 $${syntax: instr/struct instr/array instr/i31 instr/extern}
 
+.. _syntax-instr-stack:
+
+Stack Instructions
+~~~~~~~~~~~~~~~~~~
+
+$${syntax: instr/stack}
+
 .. _syntax-instr-local:
 .. _syntax-instr-global:
 
 Variable Instructions
 ~~~~~~~~~~~~~~~~~~~~~
 
-$${syntax+: 
+$${syntax+:
   instr/local
   instr/global
 }
@@ -67,7 +74,7 @@ Memory Instructions
 .. _syntax-instr-memory:
 .. _syntax-memop:
 
-$${syntax+: 
+$${syntax+:
   instr/memory instr/data
   memop
 }
@@ -86,7 +93,7 @@ $${definition: memop0}
 Control Instructions
 ~~~~~~~~~~~~~~~~~~~~
 
-$${syntax+: 
+$${syntax+:
   blocktype
   {instr/block instr/br instr/call}
 }

@@ -192,10 +192,12 @@ syntax fieldtype hint(desc "field type") =
 syntax functype hint(desc "function type") = resulttype -> resulttype
 syntax structtype hint(desc "structure type") = list(fieldtype)
 syntax arraytype hint(desc "array type") = fieldtype
+syntax stacktype hint(desc "stack type") = resulttype reftype
 
 syntax comptype hint(desc "composite type") =
   | STRUCT structtype
   | ARRAY arraytype
+  | STACK stacktype
   | FUNC functype
 
 syntax subtype/syn hint(desc "sub type") =
@@ -562,6 +564,15 @@ syntax instr/array hint(desc "array reference instruction") = ...
   | ARRAY.COPY typeidx typeidx
   | ARRAY.INIT_DATA typeidx dataidx
   | ARRAY.INIT_ELEM typeidx elemidx
+  | ...
+
+syntax instr/stack hint(desc "stack reference instruction") = ...
+  | STACK.NEW typeidx funcidx
+  | STACK.NEW_REF typeidx typeuse
+  | STACK.NEW_SWITCH typeidx funcidx
+  | STACK.NEW_SWITCH_REF typeidx typeuse
+  | STACK.SWITCH typeidx
+  | STACK.RETIRE typeidx
   | ...
 
 syntax instr/extern hint(desc "external reference instruction") = ...
