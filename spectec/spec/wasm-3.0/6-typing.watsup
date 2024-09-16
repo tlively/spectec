@@ -292,7 +292,7 @@ rule Heaptype_sub/trans:
   -- Heaptype_sub: C |- heaptype' <: heaptype_2
 
 rule Heaptype_sub/eq-any:
-  C |- EQ <: ANY
+  C |- EQ <: MANY
 
 rule Heaptype_sub/i31-eq:
   C |- I31 <: EQ
@@ -333,7 +333,7 @@ rule Heaptype_sub/rec:
 
 rule Heaptype_sub/none:
   C |- NONE <: heaptype
-  -- Heaptype_sub: C |- heaptype <: ANY
+  -- Heaptype_sub: C |- heaptype <: MANY
 
 rule Heaptype_sub/nofunc:
   C |- NOFUNC <: heaptype
@@ -846,10 +846,10 @@ rule Instr_ok/array.init_data:
 ;; External reference instructions
 
 rule Instr_ok/extern.convert_any:
-  C |- EXTERN.CONVERT_ANY : (REF nul ANY) -> (REF nul EXTERN)
+  C |- EXTERN.CONVERT_ANY : (REF nul MANY) -> (REF nul EXTERN)
 
 rule Instr_ok/any.convert_extern:
-  C |- ANY.CONVERT_EXTERN : (REF nul EXTERN) -> (REF nul ANY)
+  C |- ANY.CONVERT_EXTERN : (REF nul EXTERN) -> (REF nul MANY)
 
 
 ;; Vector instructions

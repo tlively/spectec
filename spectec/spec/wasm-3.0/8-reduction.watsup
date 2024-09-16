@@ -557,7 +557,7 @@ rule Step_pure/extern.convert_any-addr:
 
 
 rule Step_pure/any.convert_extern-null:
-  (REF.NULL ht) ANY.CONVERT_EXTERN  ~>  (REF.NULL ANY)
+  (REF.NULL ht) ANY.CONVERT_EXTERN  ~>  (REF.NULL MANY)
 
 rule Step_pure/any.convert_extern-addr:
   (REF.EXTERN addrref) ANY.CONVERT_EXTERN  ~>  addrref
